@@ -167,8 +167,15 @@ var cols=['#2B59FF','#1FC99A','#FF5D73','#9B5DE5'],ci=0;
 robot.addEventListener('click',function(){ci=(ci+1)%cols.length;head.setAttribute('fill',cols[ci])});
 
 document.getElementById('go').addEventListener('click',function(){
-  var v=document.getElementById('email').value.trim(),m=document.getElementById('msg');
-  m.textContent=/^\S+@\S+\.\S+$/.test(v)?'Thanks! You are on the list.':'Please enter a valid email address.';
+  var b=this,v=document.getElementById('email').value.trim(),m=document.getElementById('msg');
+  if(!/^\S+@\S+\.\S+$/.test(v)){m.textContent='Please enter a valid email address.';return}
+  b.disabled=true;m.textContent='Sending…';
+  fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
+    body:JSON.stringify({access_key:'f6c7e1c7-af8f-4b5f-ad46-011e841d7663',subject:'New Cuesden waitlist signup',from_name:'Cuesden website',email:v,message:'Waitlist signup: '+v})})
+    .then(function(r){return r.json()})
+    .then(function(d){if(!d.success)throw 0;m.textContent='Thanks! You are on the list.';document.getElementById('email').value=''})
+    .catch(function(){m.textContent='Something went wrong. Please try again, or email support@cuesden.com.'})
+    .finally(function(){b.disabled=false});
 });
 </script>
 </body>
