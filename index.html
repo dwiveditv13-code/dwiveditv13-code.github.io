@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Cuesden – Maker's Lab for kids aged 5–14</title>
+<title>Cuesden – Maker's Lab for kids aged 5 and above</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -44,6 +44,30 @@ section{padding:56px 0}
 .panel ul{list-style:none;padding:0;margin:14px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
 .panel li{background:var(--bg);border-radius:16px;padding:14px 16px}
 .panel li b{display:block;font-family:Fredoka,sans-serif;font-size:1.15rem}
+.stage{display:block;width:100%;margin:0 0 12px;padding:0;border:0;border-radius:12px;background:var(--card);cursor:pointer;touch-action:manipulation}
+.stage svg{display:block;width:100%;height:auto}
+.stage .k{stroke:var(--ink);stroke-width:4}
+.stage .fl{stroke:var(--soft);stroke-width:3;stroke-linecap:round;opacity:.5}
+.stage .sh{fill:var(--ink);opacity:.12}
+.stage .note{fill:var(--ink);font:700 22px Fredoka,sans-serif;opacity:0}
+.stage-hint{display:block;color:var(--soft);font-size:.9rem;margin-top:6px}
+.o-walk{animation:o-walk 7s ease-in-out infinite alternate}
+.o-sway,.o-dance{transform-box:fill-box;transform-origin:50% 100%}
+.o-sway{animation:o-sway .5s ease-in-out infinite alternate}
+.o-legL{animation:o-step .5s ease-in-out infinite alternate}
+.o-legR{animation:o-step .5s ease-in-out infinite alternate-reverse}
+.o-eye{transform-box:fill-box;transform-origin:center;animation:o-blink 4s infinite}
+.dance .o-walk{animation-play-state:paused}
+.dance .o-dance{animation:o-dance 1.6s ease-in-out}
+.dance .note{animation:o-note 1.6s ease-out}
+.dance .note:nth-child(2){animation-delay:.25s}
+.dance .note:nth-child(3){animation-delay:.5s}
+@keyframes o-walk{from{transform:translateX(-60px)}to{transform:translateX(60px)}}
+@keyframes o-sway{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
+@keyframes o-step{from{transform:none}to{transform:translateY(-7px)}}
+@keyframes o-blink{0%,92%,100%{transform:none}96%{transform:scaleY(.1)}}
+@keyframes o-dance{0%,100%{transform:none}15%{transform:translateY(-20px) rotate(-12deg)}30%{transform:none}45%{transform:translateY(-20px) rotate(12deg)}60%{transform:none}75%{transform:translateY(-26px) scaleX(-1)}90%{transform:none}}
+@keyframes o-note{0%{opacity:0;transform:none}20%{opacity:1}100%{opacity:0;transform:translateY(-36px)}}
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin-top:24px;counter-reset:s;padding:0;list-style:none}
 .steps li{counter-increment:s;background:var(--card);border-radius:22px;padding:20px;border:3px solid var(--ink)}
 .steps li:before{content:counter(s);display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--yellow);color:#14213D;font:700 1.3rem Fredoka,sans-serif;margin-bottom:10px}
@@ -66,7 +90,7 @@ footer{padding:36px 0;color:var(--soft);text-align:center;font-size:.95rem}
 <body>
 <div class="wrap">
 <header>
-  <a class="logo" href="#top"><img src="icons/FullLogo_Transparent_NoBuffer.png" alt="cuesden" width="176" height="72"></a>
+  <a class="logo" href="#top"><img src="icons/FullLogo_Transparent_NoBuffer.png" alt="Cuesden" width="176" height="72"></a>
   <nav><a href="#tracks">Age tracks</a><a href="#how">How it works</a><a href="#parents">Parents</a><a class="keep" href="#join">Join</a></nav>
 </header>
 
@@ -74,7 +98,7 @@ footer{padding:36px 0;color:var(--soft);text-align:center;font-size:.95rem}
 <div class="hero">
   <div>
     <h1>Achievement is something you <s>buy</s> <mark>build</mark></h1>
-    <p>Cuesden is a hands-on Makers Lab for kids aged 5 to 14. We start with simple blocks and motors, and grow up to sensors, code and machines with Physical Artificial Intelligence.</p>
+    <p>Cuesden is a hands-on Maker's Lab for kids aged 5 and above. We start with simple blocks and motors, and work up to sensors, coding, AI training and machines with Physical Intelligence.</p>
     <a class="btn" href="#join">Join the waitlist</a>
   </div>
   <div>
@@ -102,7 +126,7 @@ footer{padding:36px 0;color:var(--soft);text-align:center;font-size:.95rem}
   <div class="tabs" role="tablist" aria-label="Age tracks">
     <button class="tab" role="tab" aria-selected="true" data-i="0" id="t0">Ages 5–7</button>
     <button class="tab" role="tab" aria-selected="false" data-i="1" id="t1">Ages 8–10</button>
-    <button class="tab" role="tab" aria-selected="false" data-i="2" id="t2">Ages 11–14</button>
+    <button class="tab" role="tab" aria-selected="false" data-i="2" id="t2">Ages 11 and above</button>
   </div>
   <div class="panel" id="panel" role="tabpanel" aria-labelledby="t0" aria-live="polite"></div>
 </section>
@@ -111,9 +135,9 @@ footer{padding:36px 0;color:var(--soft);text-align:center;font-size:.95rem}
   <h2>How every class works</h2>
   <p>Each session follows the same four steps, so kids always know what comes next.</p>
   <ol class="steps">
-    <li><h3>Imagine</h3><p>Pick a challenge and sketch a plan. What should the robot do?</p></li>
+    <li><h3>Imagine and innovate</h3><p>Pick a challenge or study a set one, then sketch a plan. What should the robot do?</p></li>
     <li><h3>Build</h3><p>Snap, screw or code the parts together with a mentor nearby.</p></li>
-    <li><h3>Test</h3><p>Switch it on. Watch what works and what wobbles.</p></li>
+    <li><h3>Compete and test</h3><p>Switch it on. Compete against other builders and see what works and what doesn't.</p></li>
     <li><h3>Improve</h3><p>Fix one thing, try again, and show the group.</p></li>
   </ol>
 </section>
@@ -139,22 +163,54 @@ footer{padding:36px 0;color:var(--soft);text-align:center;font-size:.95rem}
   </div>
 </section>
 </main>
-<footer>© Cuesden. Maker's Lab for curious kids aged 5–14.</footer>
+<footer>© Cuesden. Maker's Lab for curious kids aged 5 and above.</footer>
 </div>
 
 <script>
 var tracks=[
-{n:"Tiny Builders",c:"#FFC93C",d:"Big pieces, bright lights and simple motors. Kids learn how things move by making them move.",p:[["Wobble Bot","A walking toy powered by one motor."],["Light-up Buddy","Connect a battery, a switch and an LED."],["Marble Machine","Build ramps and gears that send a marble on a trip."]]},
-{n:"Makers",c:"#1FC99A",d:"Kids meet sensors and block-based coding, and start telling robots what to do.",p:[["Line Follower","A car that follows a black line on the floor."],["Guard Bot","Uses a distance sensor to spot anything that comes close."],["Dance Bot","Code moves, sounds and lights to music."]]},
-{n:"Engineers",c:"#FF5D73",d:"Real microcontrollers and text-based code. Kids design, wire, program and debug their own machines.",p:[["Maze Solver","A robot that finds its own way out."],["Robot Arm","Servo-controlled arm that picks up and moves objects."],["Weather Station","Read sensors and show the data on a screen."]]}];
+{n:"Tiny Hands",c:"#FFC93C",d:"Big pieces, bright lights and simple motors. Kids learn how things move by making them move.",p:[["Brick Car Mania","Build cars with bricks that can perform awesome stunts on tracks."],["Lego Technic Buddy","Create your own remote-controlled LEGO car and race it with fellow builders."],["Marble Machine","Build ramps and gears that send a marble on a trip."]]},
+{n:"Makers",c:"#1FC99A",d:"Kids meet sensors and block-based coding, and start telling robots what to do.",p:[["Gadget Car","A car that can be trained to do anything."],["3D Print Bot","Assemble a bot from 3D-printed parts and show off its strengths."],["Otto Bot","A robot toy that walks, dances and makes sounds."]]},
+{n:"Builders",c:"#FF5D73",d:"Real microcontrollers, motors, code and AI training. Kids design, wire, program and debug their own machines.",p:[["Maze Solver and Autonomous Driver","A bot that drives on its own and finds its way out of a maze."],["LeRobot Arm","A Hugging Face robot arm you can train to do almost anything, from picking up toys to playing real chess with you."],["Robot Dog","Create a pet that can follow and play with you."]]}];
+var scenes={
+'Otto Bot1':'<svg viewBox="0 0 240 150" aria-hidden="true"><line class="fl" x1="10" y1="138" x2="230" y2="138"/>'+
+'<g transform="translate(120 138)"><g class="o-walk"><ellipse class="sh" cx="0" cy="2" rx="34" ry="5"/><g class="o-dance"><g class="o-sway">'+
+'<g class="o-legL"><rect class="k" x="-24" y="-38" width="14" height="30" rx="4" fill="#FFC93C"/><rect class="k" x="-32" y="-10" width="26" height="10" rx="5" fill="#FF5D73"/></g>'+
+'<g class="o-legR"><rect class="k" x="10" y="-38" width="14" height="30" rx="4" fill="#FFC93C"/><rect class="k" x="6" y="-10" width="26" height="10" rx="5" fill="#FF5D73"/></g>'+
+'<rect class="k" x="-34" y="-100" width="68" height="64" rx="12" fill="#2B59FF"/><line class="k" x1="-34" y1="-54" x2="34" y2="-54"/>'+
+'<circle class="k" cx="-14" cy="-80" r="12" fill="#fff"/><circle class="k" cx="14" cy="-80" r="12" fill="#fff"/>'+
+'<g class="o-eye"><circle cx="-14" cy="-80" r="6" fill="#14213D"/><circle cx="14" cy="-80" r="6" fill="#14213D"/></g>'+
+'<path d="M-8 -63 Q0 -58 8 -63" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/></g></g>'+
+'<g><text class="note" x="-56" y="-84">♪</text><text class="note" x="42" y="-98">♫</text><text class="note" x="-22" y="-116">♪</text></g>'+
+'</g></g></svg>'
+};
 var panel=document.getElementById('panel'),tabs=document.querySelectorAll('.tab');
 function show(i){
   var t=tracks[i];
   tabs.forEach(function(b,k){b.setAttribute('aria-selected',k==i)});
   panel.setAttribute('aria-labelledby','t'+i);
   panel.style.setProperty('--accent',t.c);
-  panel.innerHTML='<h3>'+t.n+'</h3><p>'+t.d+'</p><ul>'+t.p.map(function(x){return '<li><b>'+x[0]+'</b>'+x[1]+'</li>'}).join('')+'</ul>';
+  panel.innerHTML='<h3>'+t.n+'</h3><p>'+t.d+'</p><ul>'+t.p.map(function(x){
+    var s=scenes[x[0]];
+    return '<li>'+(s?'<button class="stage" type="button" aria-label="Make '+x[0]+' dance">'+s+'</button>':'')+'<b>'+x[0]+'</b>'+x[1]+(s?'<span class="stage-hint">Tap to make it dance.</span>':'')+'</li>';
+  }).join('')+'</ul>';
 }
+var ac;
+function tune(){
+  try{
+    ac=ac||new(window.AudioContext||window.webkitAudioContext)();
+    [523,659,784,1047].forEach(function(f,i){
+      var o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime+i*.15;
+      o.type='square';o.frequency.value=f;
+      g.gain.setValueAtTime(.04,t);g.gain.exponentialRampToValueAtTime(.001,t+.14);
+      o.connect(g).connect(ac.destination);o.start(t);o.stop(t+.15);
+    });
+  }catch(e){}
+}
+panel.addEventListener('click',function(e){
+  var s=e.target.closest('.stage');if(!s)return;
+  s.classList.remove('dance');void s.offsetWidth;s.classList.add('dance');tune();
+  clearTimeout(s._t);s._t=setTimeout(function(){s.classList.remove('dance')},2200);
+});
 tabs.forEach(function(b){b.addEventListener('click',function(){show(+b.dataset.i)})});
 show(0);
 
